@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row mt-5 p-lg-2 pr-2">
+    <div class="col-2">
+        <div class="row">
+            <div class="col titulo-mes">
+                FEBRERO
+            </div>
+        </div>
+        <div class="row pt-2">
+            <main id="calendar">
+                <section class="th">
+                    <span>S</span>
+                    <span>M</span>
+                    <span>T</span>
+                    <span>W</span>
+                    <span>T</span>
+                    <span>F</span>
+                    <span>S</span>
+                </section>
+                @{
+                    var date = DateTime.Now;
+                    var firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
+                    var lastDayOfMonth = new DateTime(date.Year, date.Month, DateTime.DaysInMonth(date.Year, date.Month));
+                    var dayOfWeek = (int)firstDayOfMonth.DayOfWeek;
+                    var auxDay = 1;
+                    var initWeek = false;
+                }
+
+                @for (int week = 0; week <= 4; week++)
+                {
+                    <div class="week">
+                        @{
+                            if (auxDay <= lastDayOfMonth.Day)
+                            {
+                                for (var day = 0; day <= 6; day++)
+                                {
+                                    if (day == dayOfWeek)
+                                    {
+                                        initWeek = true;
+                                    }
+
+                                    if (initWeek == true)
+                                    {
+                                        <div data-date="@auxDay"></div>
+                                    }
+                                    else
+                                    {
+                                        <div></div>
+                                    }
+                                    auxDay++;
+                                }
+
+                            }
+                        }
+
+                    </div>
+                }
+            </main>
+        </div>
+    </div>
+    <div class="col-10">
+        William
+    </div>
+</div>
+
